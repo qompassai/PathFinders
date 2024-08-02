@@ -1,2 +1,2 @@
-# pathfinders
-Qompass Intern program
+# Pathfinders
+Qompass Intern program: For the boldly curious
