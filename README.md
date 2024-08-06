@@ -1,2 +1,2 @@
 # Pathfinders
-Qompass Intern program: For the boldly curious
+Qompass Intern program: Destitutus ventis, remos adhibe
