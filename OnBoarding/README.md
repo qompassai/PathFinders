@@ -14,7 +14,7 @@
 ## Step 3: Install the Hugging Face Hub Library
 - In the Terminal, type the following command and press Enter:
 ```bash
-pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]'
+pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U
 
 ```
 - Wait for the installation to complete.
@@ -24,14 +24,15 @@ pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]'
 huggingface-cli login
 ```
 - You'll be prompted to enter your Hugging Face access token.
-- To get your access token:
+## Getting your access token:
 - Go back to the Hugging Face website and log in.
 - Click on your profile picture in the top right corner.
 - Select "Settings" from the dropdown menu.
 - In the left sidebar, click on "Access Tokens".
 - Click "New token", give it a name, and select the desired permissions.
 - Click "Generate a token" and copy the token that appears.
-- Paste the token into the Terminal when prompted (note: you won't see the token as you paste it, this is normal for security reasons).
+- Select a Token Type of Fine-grained, Read, or Write. For basic use-cases **select Write**, for advanced/enterprise use, **select Fine-Grained**
+- Paste the token into the Terminal when prompted (note: you won't see the token as you paste it, **this is normal** for security reasons).
 - Press Enter.
 ## Step 5: Verify Your Connection
 - In the Terminal, type the following command and press Enter:
