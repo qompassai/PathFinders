@@ -9,12 +9,13 @@
 ## Step 2: Install Python (if not already installed)
 - Open the Terminal app on your MacBook (you can find it in Applications > Utilities).
 - Type "python --version" and press Enter to check if Python is installed.
-- If Python is not installed, visit python.org and download version 3.12 https://www.python.org/ftp/python/3.12.0/python-3.12.0-macos11.pkg
+- If Python is not installed, visit python.org and download version 3.12 https://www.python.org/ftp/python/3.12.0/python-3.12.0-macos11.pkg (or latest python 3.12 version available)
 - Run the installer and follow the prompts to install Python.
 ## Step 3: Install the Hugging Face Hub Library
 - In the Terminal, type the following command and press Enter:
 ```bash
-pip install huggingface_hub
+pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]'
+
 ```
 - Wait for the installation to complete.
 ## Step 4: Link Your Account to Hugging Face Hub
