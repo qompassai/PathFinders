@@ -1,17 +1,5 @@
 # Setup Guide for Mac Users
 
-## Table of Contents
-1. [Create a Hugging Face Account](#step-1-create-a-hugging-face-account)
-2. [Install Python](#step-2-install-python-if-not-already-installed)
-3. [Install the Hugging Face Hub Library](#step-3-install-the-hugging-face-hub-library)
-4. [Link Your Account to Hugging Face Hub](#step-4-link-your-account-to-hugging-face-hub)
-5. [Verify Your Hugging Face Connection](#step-5-verify-your-hugging-face-connection)
-6. [Install GitHub CLI](#step-6-install-github-cli)
-7. [Set Up SSH for GitHub](#step-7-set-up-ssh-for-github)
-8. [Configure GitHub CLI](#step-8-configure-github-cli)
-9. [Using GitHub CLI](#step-9-using-github-cli)
-10. [Using Hugging Face CLI](#step-10-using-hugging-face-cli)
-
 ## Step 1: Create a Hugging Face Account
 - Open your web browser (like Safari or Chrome) on your MacBook.
 - Go to the Hugging Face website by typing "huggingface.co" in the address bar.
