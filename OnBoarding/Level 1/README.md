@@ -164,7 +164,9 @@ pbcopy < ~/.ssh/id_ed25519.pub
 gh auth login
 ```
 - Add keys to your github
+```bash
 gh ssh-key add ~/.ssh/id_ed25519.pub -t "Something unique"
+```
 **Replace "Something unique" with a descriptive title for your key.**
 - Check that your key has been added
 ```bash
