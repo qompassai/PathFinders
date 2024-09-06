@@ -112,12 +112,12 @@ sub   ed25519/0x84F3B5E1DD2F9F5A 2024-08-25 [A]
 3. Secret keys are often marked with "sec" (secret) or "ssb" (secret subkey)
 4. Public keys are marked with "pub" (public) or "sub" (public subkey)
 5. The key ID, creation date, and expiration date (if any) are typically displayed
-6. User IDs (email addresses, names) associated with each key are also shown
+6. User IDs (email addresses, names) associated with each key are also shown.
+7. You can import others' public keys to encrypt messages to them or verify their signature
+8. Your public keys can be exported and shared, while your private keys should remain secure
 ```
 
-
 - View your gpg key id in short hexidecimal format 
-
 
 ```bash
 gpg --keyid-format 0xshort --list-keys
@@ -131,6 +131,70 @@ gpg --keyid-format 0xshort --list-keys
 - In order to add subordinate keys to your GPG key, you use the addkey command with the gpg cli
 
 ```bash
-gpg --expert --edit-key "your key id"
+gpg --expert --edit-key "your email or key ID"
 ```
+- then type addkey, you should see the below
 
+```example
+gpg> addkey
+Please select what kind of key you want:
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+   (5) Elgamal (encrypt only)
+   (6) RSA (encrypt only)
+   (7) DSA (set your own capabilities)
+   (8) RSA (set your own capabilities)
+  (10) ECC (sign only)
+  (11) ECC (set your own capabilities)
+  (12) ECC (encrypt only)
+  (13) Existing key
+  (14) Existing key from card
+Your selection? 
+```
+- type 11, you should see the below
+
+```bash
+Your selection? 11
+
+Possible actions for this ECC key: Sign Authenticate 
+Current allowed actions: Sign 
+
+   (S) Toggle the sign capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+```
+- press S and A until you only see Sign, then press q. In the next menu press 1 to select Curve 25519, 1y for 1 year and select that this is correct.
+```bash
+Your selection? q
+Please select which elliptic curve you want:
+   (1) Curve 25519 *default*
+   (2) Curve 448
+   (3) NIST P-256
+   (4) NIST P-384
+   (5) NIST P-521
+   (6) Brainpool P-256
+   (7) Brainpool P-384
+   (8) Brainpool P-512
+   (9) secp256k1
+Your selection? 1
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0) 1y
+Key expires at Sat 06 Sep 2025 10:20:58 AM PDT
+Is this correct? (y/N)
+```
+- verify the new key, which is the one that has [S] next to it. This public subkey only has signing capability, limiting any damage done in the event that the corresonding private key was compromised to only allow for a bad actor to replicate signing, and not encryption or authentication linked to your private key.
+```bash
+gpg --list-keys --keyid-format long, it should look like below
+
+pub   ed25519/0x1234567890ABCDEF 2023-09-06 [SC]
+      Key fingerprint = AAAA BBBB CCCC DDDD EEEE  FFFF 1234 5678 90AB CDEF
+uid                   [ultimate] Your Name <your@email.com>
+sub   ed25519/0x2345678901ABCDEF 2023-09-06 [S]
+sub   ed25519/0x3456789012ABCDEF 2023-09-06 [A]
+sub   cv25519/0x4567890123ABCDEF 2023-09-06 [E]
+```
