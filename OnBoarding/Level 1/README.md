@@ -1,7 +1,8 @@
-# Setup Guide for Mac Users
+# Level 1- Setting up Your System
 
 ## Step 1: Create a Hugging Face Account
-- Open your web browser (like Safari or Chrome) on your MacBook.
+- Open your web browser (like Safari or Chrome) on your computer (Macbook/Microsoft/etc)
+
 - Go to the Hugging Face website by typing "huggingface.co" in the address bar.
 - Click on the "Sign Up" button in the top right corner of the page.
 - Enter your email address and choose a password.
@@ -9,7 +10,9 @@
 - Agree to the terms of service and click "Create Account".
 - Check your email inbox for a verification email from Hugging Face and click the link to confirm your account.
 ## Step 2: Install Python (if not already installed)
-- Open the Terminal app on your MacBook (you can find it in Applications > Utilities).
+- Open the Terminal app on your computer (you can find it in Applications > Utilities for mac, open Windows Subsystem forLinux 2 (WLS2) for Windows. Documentation will reflect using either WSL2 Arch Linux (pacman/paru/yay) and Debian-based (apt aptitude) systems).
+### Anytime "Terminal" is referenced from this point on, that either means the terminal app or iterm in mac, or WSL2 in windows. If you're running Linux natively, your default terminal will usually be a bash based terminal.
+### Anytime you see bash or zsh, this means what you enter into your computer terminal app. 
 - Type "python --version" and press Enter to check if Python is installed.
 - If Python is not installed, visit python.org and download version 3.12 https://www.python.org/ftp/python/3.12.0/python-3.12.0-macos11.pkg (or latest python 3.12 version available)
 - Run the installer and follow the prompts to install Python.
@@ -17,10 +20,13 @@
 - In the Terminal, type the following command and press Enter:
 ```bash
 pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U
-
+**if you get an error when installing pip you may need to add --break-system-packages after the -U 
+pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U --break-system-packages
 ```
 - Wait for the installation to complete.
-- add the following variable to path to enable better transfer of large files from huggingface
+- add the following variable to your terminal config to enable better transfer of large files from huggingface
+**For zsh (macos) type vim ~/.zshrc, then copy and paste the below, then type :wq to write the config and quit out of the terminal config file** 
+**for WSL2, type vim ~/.bashrc, then copy and paste the below, then type :wq to write the config and quit out of the terminal config file**  
 ```bash
 export HF_HUB_ENABLE_HF_TRANSFER=1
 ```
@@ -51,8 +57,8 @@ huggingface-cli whoami
 
 ### https://www.youtube.com/watch?v=Rm8g33O-ClE 
 
-## Step 6: Install Github CLI
-- Install homebrew if it isn't already installed
+## Step 6A: Install Github Command Line Interface (CLI) For Macs
+- Install homebrew if it isn't already installed (ignore )
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
@@ -60,13 +66,17 @@ huggingface-cli whoami
 ```bash
 brew install gh
 ```
-
+Step 6A: Install Github Command Line Interface (CLI) For Microsoft WSL2/Linux
+- Follow instructions on here based on your versino of WSL2/Linux:  https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+```Example- if you are using WSL2 Arch Linux type this
+sudo pacman -S github-cli
+```
 ## Step 7: Set up Secure Shell (SSH) for Github
 **SSH comes pre-installed on macOS, so you don't typically need to install it separately.**
 - Generate an SSH key replacing "your_email@example.com" with your email address inside ""
 ## Understanding the SSH Key Generation Command
 
-```text
+```Example
 The command `ssh-keygen -t ed25519 -C "your_email@example.com"` is used to generate a new SSH key pair. 
 1. `ssh-keygen`: This is the program used to create SSH key pairs.
 
@@ -89,7 +99,7 @@ When you run this command:
 **The private key should be kept SECRET and SECURE on your local machine, while the public key can be shared and added to services like GitHub for authentication.**
 
 This command creates a highly secure SSH key pair that you can use for various authentication purposes, including GitHub access and secure server logins.
-
+```
 ```bash
  ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
@@ -109,7 +119,7 @@ ssh-add ~/.ssh/id_ed25519
 ```
 - Add ssh agent to your shell config (~/.zshrc for zshh or ~/.bashrc for bash). You can use nano, vim, or nvim to access. 
 **Depending on your config, you may need to use sudo (super user do)to edit and save**
-- Access your shell config
+- Access your shell config )~/.zshrc for mac, ~/.bashrc for windows)
 ```bash
 vim ~/.zshrc
 ```
@@ -136,23 +146,27 @@ source ~/.zshrc
 source ~/.bashrc
 ```
 **If you opened your shell config without sudo, it may prevent you from using :wq. If this is the case, type u (undo) until it is at the oldest change, then use :qa to quit.**
-- To make shell editable (use with sudo in front if it denies permission)
+- To make shell editable (use with sudo (super-user do aka as an admin) in front if it denies permission)
 ```bash
 chmod u+w ~/.zshrc
 chmod 644 ~/.zshrc
-
+```
+```bash
+chmod u+w ~/.bashrc
+chmod 644 ~/.bashrc
+```
 # If for some reason you don't own the file (ie you have to use sudo to make changes to your shell config)
 # For zsh
 sudo chown $USER:$USER ~/.zshrc
 # For bash
 sudo chown $USER:$USER ~/.bashrc
 
-```
+```Explanation
 * chmod: The command to change file permissions
 * u: Refers to the user (owner) of the file
 * +w: Adds write permission
 * ~/.zshrc: The path to your .zshrc file
-
+```
  ## Add SSH Key to GitHub using GitHub CLI
 
 - Copy the SSH key to your clipboard:
