@@ -11,7 +11,43 @@
 - Check your email inbox for a verification email from Hugging Face and click the link to confirm your account.
 ## Step 2: Install Python (if not already installed)
 - Open the Terminal app on your computer (you can find it in Applications > Utilities for mac, open Windows Subsystem forLinux 2 (WLS2) for Windows. Documentation will reflect using either WSL2 Arch Linux (pacman/paru/yay) and Debian-based (apt aptitude) systems).
-### Anytime "Terminal" is referenced from this point on, that either means the terminal app or iterm in mac, or WSL2 in windows. If you're running Linux natively, your default terminal will usually be a bash based terminal.
+
+**Anytime "Terminal" is referenced from this point on, that either means the terminal app or iterm in mac, or WSL2 in windows. If you're running Linux natively, your default terminal will usually be a bash based terminal.**
+- How to set up software on your system for Qompass work (can be typed or copy/paste) all of the code block into your system.
+
+```Arch/WSL2 Arch
+sudo pacman -Syyu
+sudo pacman -S base base-devel python python-pip git git-lfs
+sudo pacman -Syyu
+python --version
+pip --version
+which python
+pip3 install numpy scipy pandas matplotlib
+pip3 install pynvim
+```
+
+# MacOS
+## Install Homebrew if not already installed
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+```bash
+brew install python neovim node git git-lfs
+pip3 install transformers torch torchvision torchaudio
+```
+# Debian-based systems
+```bash
+sudo apt update && upgrade
+sudo apt install -y python3 python3-pip
+sudo apt install neovim
+pip3 install transformers torch torchvision torchaudio
+pip3 install numpy scipy pandas matplotlib
+pip3 install pynvim
+sudo apt install nodejs npm
+python --version
+pip --version
+```
+
 ### Anytime you see bash or zsh, this means what you enter into your computer terminal app. 
 - Type "python --version" and press Enter to check if Python is installed.
 - If Python is not installed, visit python.org and download version 3.12 https://www.python.org/ftp/python/3.12.0/python-3.12.0-macos11.pkg (or latest python 3.12 version available)
@@ -19,8 +55,10 @@
 ## Step 3: Install the Hugging Face Hub Library
 - In the Terminal, type the following command and press Enter:
 ```bash
-pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U
-**if you get an error when installing pip you may need to add --break-system-packages after the -U 
+pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai] transformers' -U
+```
+**if you get an error when installing pip you may need to add --break-system-packages after the -U** 
+```bash
 pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U --break-system-packages
 ```
 - Wait for the installation to complete.
