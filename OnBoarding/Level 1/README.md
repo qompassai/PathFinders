@@ -118,8 +118,7 @@ sudo pacman -S github-cli
 ```
 
 ```Debian/Ubuntu \WSL2 Ubuntu/Debian
-
-	&& sudo apt install gh
+sudo apt install gh
 ```
 
 ## Step 7: Set up Secure Shell (SSH) for Github (MacOS/Linux/WSL)
