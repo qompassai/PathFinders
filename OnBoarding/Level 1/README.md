@@ -57,7 +57,8 @@ pip --version
 ```bash
 pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai] transformers' -U
 ```
-**if you get an error when installing pip you may need to add --break-system-packages after the -U** 
+**if you get an error when installing pip you may need to add --break-system-packages after the -U**
+
 ```bash
 pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U --break-system-packages
 ```
@@ -95,23 +96,37 @@ huggingface-cli whoami
 
 ### https://www.youtube.com/watch?v=Rm8g33O-ClE 
 
-## Step 6A: Install Github Command Line Interface (CLI) For Macs
-- Install homebrew if it isn't already installed (ignore )
-```bash
+## Step 6 A/B: Install Github Command Line Interface (CLI)
+
+
+** Mac users refer to 6A, WSL/Linux users please refer to 6B.
+### 6A Install Github Command Line Interface (CLI) For MacOS
+### 
+- Install homebrew if it isn't already installed (IGNORE if you are using Microsoft WSL/Linux )
+
+```MacOS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-- Install Github Command Line Interface (CLI)
-```bash
 brew install gh
 ```
-Step 6A: Install Github Command Line Interface (CLI) For Microsoft WSL2/Linux
-- Follow instructions on here based on your versino of WSL2/Linux:  https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-```Example- if you are using WSL2 Arch Linux type this
+
+### 6B Install Github Command Line Interface (CLI) For Microsoft WSL2/Linux
+
+- Follow instructions on here based on your version of WSL2/Linux:  https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+
+```Arch | WSL2 Arch
 sudo pacman -S github-cli
 ```
-## Step 7: Set up Secure Shell (SSH) for Github
+
+```Debian/Ubuntu \WSL2 Ubuntu/Debian
+
+	&& sudo apt install gh
+```
+
+## Step 7: Set up Secure Shell (SSH) for Github (MacOS/Linux/WSL)
+
 **SSH comes pre-installed on macOS, so you don't typically need to install it separately.**
 - Generate an SSH key replacing "your_email@example.com" with your email address inside ""
+
 ## Understanding the SSH Key Generation Command
 
 ```Example
