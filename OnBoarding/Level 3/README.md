@@ -1,43 +1,53 @@
 # Level 3- Let's encrypt & decrypt with gpg
-To encrypt a file:
 
+- To encrypt a file
+
+```MacOS | WSL2 | Linux
     Basic encryption:
+```
 
-    text
+```MacOS | WSL2 | Linux
     gpg -c filename
+```
 
 This will prompt you for a passphrase and create an encrypted file named filename.gpg
 Encrypt for a specific recipient (using their public key):
 
-text
+```MacOS | WSL2 | Linux
 gpg -e -r recipient@email.com filename
+```
 
 or
 
-text
+```MacOS | WSL2 | Linux
 gpg --encrypt --recipient recipient@email.com filename
+```
 
-Encrypt with a specific output filename:
+- Encrypt with a specific output filename:
 
-text
+```MacOS | WSL2 | Linux
 gpg -e -r recipient@email.com -o encrypted_file.gpg original_file
+```
 
-To decrypt a file:
+To decrypt a file, type gpg and then the filename
+```MacOS | WSL2 | Linux
+ gpg filename.gpg
+```
 
-    Basic decryption:
+Basic decryption
 
-    text
-    gpg filename.gpg
-
+```MacOS | WSL2 | Linux
+   
 This will prompt for the passphrase and create the decrypted file.
 Decrypt to a specific output file:
 
-```bash
+```MacOS | WSL2 | Linux
 gpg -d -o decrypted_file filename.gpg
 ```
+
 or
 
-```bash
+```MacOS | WSL2 | Linux
 gpg --decrypt --output decrypted_file filename.gpg
 ```
 
@@ -49,14 +59,16 @@ gpg --decrypt --output decrypted_file filename.gpg
     The -o flag specifies the output file
     The -r flag specifies the recipient (for asymmetric encryption)
 ```
+
 ## ELI5: Secret keys lock up our secrets. Public keys allow people to share secrets with each other.
 
 # Creating the right GPG key for the right job
 
 ## Understanding your gpg secret keys
-- Review this example breakdown of the gpg --list-secret-keys command to understand what's going on under the hood of gpg. 
 
-```bash
+- Review this example breakdown of the gpg --list-secret-keys command to understand what's going on under the hood of gpg.
+
+```MacOS | WSL2 | Linux
 gpg --list-secret-keys
 [keyboxd]
 ---------
@@ -66,7 +78,9 @@ gpg --list-secret-keys
 4. ssb   cv25519 2024-08-26 [E]
 5. ssb   ed25519 2024-08-26 [A]
 ```
-- 1. sec indicates this is your secret (private) primary key. **DO NOT SHARE THIS**. 0x7A3D62E9F1B8C405 is **your key ID**. The 0x prefix is a universally recognized identifier for hexidecmial representations. ed25519 is the algorithm used (Edwards-curve Digital Signature Algorithm).  2024-08-26 is the creation date. [SC] means this key has Signing and Certification capabilities.
+
+- 1. sec indicates this is your secret (private) primary key. **DO NOT SHARE THIS**.
+- 0x7A3D62E9F1B8C405 is **your key ID**. The 0x prefix is a universally recognized identifier for hexidecmial representations. ed25519 is the algorithm used (Edwards-curve Digital Signature Algorithm).  2024-08-26 is the creation date. [SC] means this key has Signing and Certification capabilities.
 - 2.  0929EC5B90A4EB9E37283E9CFFF8C01192806618 is the full 40-character fingerprint of your primary key. It has the same value as a password, just more secure.
 - 3. uid stands for User ID. [ultimate] is the trust level (highest for your own key). The rest is your name, comment (in parentheses), and email address that you input when you created the key. 
 - 4. ssb indicates a secret subkey, cv25519 is the algorithm (Curve25519, used for encryption).[E] means this subkey is for Encryption.
@@ -78,19 +92,26 @@ So now we've (at least) made one GPG key pair consisting of a private, secret ke
 ## **bash** is the default terminal setup for most versions of the GNU/Linux operating system (OS). **zsh** is the default for MacOS. When you see a code block with bash or zsh, know that you can use either for our puroses. Windows comes with powershell by default which does **NOT** work interchangably with zsh or bash. 
 
 - View your gpg secret key ids
-```bash
+
+```MacOS | WSL2 | Linux
 gpg --list-secret-keys
 ```
 
 - View all of your public gpg keys (the ones you've generated and the ones that have been shared with you)
-```bash
+
+```MacOS | WSL2 | Linux
 gpg --list-keys
 ```
-- View only your gpg public keys
-```bash
-gpg --list-keys **your email**
 
-```Example
+- View only your gpg public keys
+
+```MacOS | WSL2 | Linux
+gpg --list-keys **your email**
+```
+
+- Read the example below
+
+```MacOS | WSL2 | Linux
 gpg --list-keys map@qompass.ai
 pub   ed25519/0x4F8B914D6026570F 2024-08-23 [SC]
       Key fingerprint = 0BFC 1A9D 6DB0 0C36 7679  BB22 4F8B 914D 6026 570F
@@ -117,12 +138,13 @@ sub   ed25519/0x84F3B5E1DD2F9F5A 2024-08-25 [A]
 8. Your public keys can be exported and shared, while your private keys should remain secure
 ```
 
-- View your gpg key id in short hexidecimal format 
+- View your gpg key id in short hexidecimal format
 
-```bash
+```MacOS | WSL2 | Linux
 gpg --keyid-format 0xshort --list-keys
 ```
-```Exlanation
+
+```MacOS | WSL2 | Linux
 1. gpg: This is the command to use the GNU Privacy Guard (GPG) software.
 2. --keyid-format 0xshort: This option tells GPG to display key IDs in a short format (last 8 characters) with a "0x" prefix. Depending on your 
 3. --list-keys: This instructs GPG to show a list of all public keys in your keyring.
@@ -130,12 +152,13 @@ gpg --keyid-format 0xshort --list-keys
 
 - In order to add subordinate keys to your GPG key, you use the addkey command with the gpg cli
 
-```bash
+```MacOS | WSL2 | Linux
 gpg --expert --edit-key "your email or key ID"
 ```
+
 - then type addkey, you should see the below
 
-```example
+```MacOS | WSL2 | Linux
 gpg> addkey
 Please select what kind of key you want:
    (3) DSA (sign only)
@@ -151,9 +174,10 @@ Please select what kind of key you want:
   (14) Existing key from card
 Your selection? 
 ```
+
 - type 11, you should see the below
 
-```bash
+```MacOS | WSL2 | Linux
 Your selection? 11
 
 Possible actions for this ECC key: Sign Authenticate 
@@ -163,8 +187,11 @@ Current allowed actions: Sign
    (A) Toggle the authenticate capability
    (Q) Finished
 ```
+
 - press S and A until you only see Sign, then press q. In the next menu press 1 to select Curve 25519, 1y for 1 year and select that this is correct.
-```bash
+
+```MacOS | WSL2 | Linux
+
 Your selection? q
 Please select which elliptic curve you want:
    (1) Curve 25519 *default*
@@ -187,14 +214,85 @@ Key is valid for? (0) 1y
 Key expires at Sat 06 Sep 2025 10:20:58 AM PDT
 Is this correct? (y/N)
 ```
-- verify the new key, which is the one that has [S] next to it. This public subkey only has signing capability, limiting any damage done in the event that the corresonding private key was compromised to only allow for a bad actor to replicate signing, and not encryption or authentication linked to your private key.
-```bash
-gpg --list-keys --keyid-format long, it should look like below
 
-pub   ed25519/0x1234567890ABCDEF 2023-09-06 [SC]
-      Key fingerprint = AAAA BBBB CCCC DDDD EEEE  FFFF 1234 5678 90AB CDEF
-uid                   [ultimate] Your Name <your@email.com>
-sub   ed25519/0x2345678901ABCDEF 2023-09-06 [S]
-sub   ed25519/0x3456789012ABCDEF 2023-09-06 [A]
-sub   cv25519/0x4567890123ABCDEF 2023-09-06 [E]
+- Verify the new key, which is the one that has [S] next to it.
+
+```Read Me
+This public subkey only has signing capability, limiting any damage done should the pair of secret/public keys be acquired by a bad actor (or just someone who isn't you).
 ```
+
+## Adding an authentication key
+
+- We have our signing subkey for digitally signing our data.
+- Now let's make a public authentication subkey.
+
+```MacOS | WSL2 | Linux
+gpg --expert --edit-key "your email or key ID"
+```
+
+- then type addkey.
+
+```MacOS | WSL2 | Linux
+gpg> addkey
+Please select what kind of key you want:
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+   (5) Elgamal (encrypt only)
+   (6) RSA (encrypt only)
+   (7) DSA (set your own capabilities)
+   (8) RSA (set your own capabilities)
+  (10) ECC (sign only)
+  (11) ECC (set your own capabilities)
+  (12) ECC (encrypt only)
+  (13) Existing key
+  (14) Existing key from card
+Your selection? 
+```
+
+- type 11, you should see the below
+
+```MacOS | WSL2 | Linux
+Your selection? 11
+
+Possible actions for this ECC key: Sign Authenticate 
+Current allowed actions: Sign 
+
+   (S) Toggle the sign capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+```
+
+- press S and A until you only see A (for Authenticate), then press q.
+- In the next menu press 1 to select Curve 25519, 1y for 1 year like before
+
+```MacOS | WSL2 | Linux
+
+Your selection? q
+Please select which elliptic curve you want:
+   (1) Curve 25519 *default*
+   (2) Curve 448
+   (3) NIST P-256
+   (4) NIST P-384
+   (5) NIST P-521
+   (6) Brainpool P-256
+   (7) Brainpool P-384
+   (8) Brainpool P-512
+   (9) secp256k1
+Your selection? 1
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0) 1y
+Key expires at Sat 06 Sep 2025 10:20:58 AM PDT
+Is this correct? (y/N)
+```
+
+- Verify the new key, which is the one that has [A] next to it.
+- This public subkey only authenticates, ie accessing services like github or remote servers.
+
+## Level 3 Finish Line
+
+- Congrats on finishing level 3! You're well on your way!
