@@ -2,14 +2,20 @@
 
 ## We are going to set up the uncomplicated firewall (UFW) to set up secure remote connections that will be authenticated with our public GPG keys we have created. 
 
-```macos
+- MacOS
+
+```zsh
 brew update && brew upgrade && brew cleanup && brew doctor
 brew install ufw pinentry-mac gnupg
 ```
 
+- Arch/WSL2 Arch
+
 ```Arch/WSL2 Arch
 sudo pacman -Syyu && sudo pacman -Scc && sudo pacman -S ufw pinentry-ncurses gnupg
 ```
+
+- Ubuntu/Debian | WSL2 Ubuntu/Debian
 
 ```Ubuntu/Debian | WSL2 Ubuntu/Debian
 sudo apt update && sudo apt upgrade 
@@ -18,6 +24,7 @@ sudo apt install ufw
 
 ## Enable UFW
 
+- MacOS | Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
 ```MacOS | Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
 sudo ufw enable
 sudo ufw allow 22/tcp
@@ -27,11 +34,15 @@ sudo ufw reload
 
 - Configure ssh daemon (sshd) for public key authentication over ssh to remote servers
 
+- MacOS | Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
+
 ```MacOS | Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
 sudo nvim /etc/ssh/sshd_config
 ```
 
 - Uncomment the following lines then :wq to save
+
+- MacOS | Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
 
 ```MacOS | Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
 PubkeyAuthentication yes
