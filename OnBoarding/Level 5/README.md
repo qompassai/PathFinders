@@ -4,7 +4,7 @@
 
 - MacOS
 
-```zsh
+```"MacOS"
 brew update && brew upgrade && brew cleanup && brew doctor
 brew install ufw pinentry-mac gnupg
 ```
