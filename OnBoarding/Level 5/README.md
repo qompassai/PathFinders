@@ -2,10 +2,10 @@
 
 ## We are going to set up the uncomplicated firewall (UFW) to set up secure remote connections that will be authenticated with our public GPG keys we have created. 
 
-"```MacOS"
+```macos
 brew update && brew upgrade && brew cleanup && brew doctor
 brew install ufw pinentry-mac gnupg
-"```"
+```
 
 ```Arch/WSL2 Arch
 sudo pacman -Syyu && sudo pacman -Scc && sudo pacman -S ufw pinentry-ncurses gnupg
