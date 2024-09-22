@@ -1,31 +1,56 @@
 # Configuring Gnu Privacy Guard (GPG) with Github
+
 - Confirm your installation of github cli
-```bash
+
+```MacOS | WSL | Linux
 gh auth login
 ```
+
 - Test the key  
-```bash
+
+```MacOS | WSL | Linux
 ssh -T git@github.com
 ```
+
 - Remember to ensure your SSH agent is running and the key is loaded. If its's not in your shell config run these commands one line at a time.
-```bash
+
+
+```MacOS | WSL | Linux
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 ```
+
 **If successful, you'll see a message confirming that you've authenticated, but GitHub does not provide shell access.**
 
 ## Setting up GNU Privacy Guard (GPG) for Github
 
-1. Install GPG
-```bash
+1A. Install GPG (MacOS)
+
+```MacOS
 brew install gnupg
 ```
+
+1B. Install GPG (Linux/Microsoft WSL)
+
+```Arch | WSL 2 Arch
+sudo pacman -Syyu
+sudo pacman -S gnupg
+```
+
+```Debian/Ubuntu | WSL2 Debian/Ubuntu
+sudo apt update && sudo apt upgrade
+sudo apt install gnupg
+```
+
 2. Generate a new GPG key
-```bash
+
+```MacOS | WSL | Linux
 gpg --expert --full-generate-key
 ```
+
 - You'll see an output like the one below
-```bash
+
+```MacOS | WSL | Linux
 gpg --expert --full-generate-key
 Please select what kind of key you want:
    (1) RSA and RSA
@@ -41,9 +66,12 @@ Please select what kind of key you want:
   (14) Existing key from card
 Your selection?
 ```
-**Press 9 to choose "ECC (sign and encrypt)" or "ECC and ECC",**
+
+- **Press 9 to choose "ECC (sign and encrypt)" or "ECC and ECC"**
+
 - Then press 1 to select Curve 25519 *default*, based on the output below
-```bash
+
+```MacOS | WSL | Linux
 Please select which elliptic curve you want:
    (1) Curve 25519 *default*
    (2) Curve 448
@@ -55,76 +83,111 @@ Please select which elliptic curve you want:
    (8) Brainpool P-512
    (9) secp256k1
 ```
+
 - Type 1y for one year expiration
-```bash
+
+```MacOS | WSL2 | Linux
 Key is valid for? (0) 1y
 Key expires at Mon 25 Aug 2025 06:28:38 PM PDT
 Is this correct? (y/N)
 ```
-- Then type in your name, email address, and a comment to be identified with your public key
-```bash
+
+- Then type in your name, email address, and a comment to identify the key.
+- It is common practice to leave the comment blank.
+- Because you're a qompass pathfinder, put qompass as the comment, example below.
+
+```MacOS | WSL | Linux
 GnuPG needs to construct a user ID to identify your key.
 
-Real name: Matt P
+Real name: Matt A. Porter
 Email address: map@qompass.ai
-Comment: example
+Comment: qompass
 ```
-The final output will looke like the below. Type o and then enter a passphrase for the new keypair. 
-```bash
-Real name: Matt P
+
+- Type o and then enter a passphrase for the new keypair.
+- The final output will looke like the below.
+
+```MacOS | WSL | Linux
+Real name: Matt A. Porter
 Email address: map@qompass.ai
-Comment: example
+Comment: qompass 
 You selected this USER-ID:
-    "Matt P (example) <map@qompass.ai>"
+    "Matt A. Porter (qompass) <map@qompass.ai>"
 ```
 
 - Check if you made the key correctly by listing your secret key's
-```bash
-gpg --list-secret-keys --keyid-format LONG
+
+```MacOS | WSL | Linux
+gpg --list-keys --keyid-format LONG
 ```
+
 **Your key ID is on the line starting with "sec" after the "/"**
 - Export your GPG public key from your secret key id.
-```bash
-gpg --armor --export YOUR_KEY_ID > gpg_github_key.txt
+
+```MacOS | WSL | Linux
+gpg --armor --export YOUR_KEY_ID > gpg_github_key.asc
 ```
+
 **You can name the public key anything.txt, just make sure it is unique to you**
 - Add the GPG key to your GitHub account using the GitHub CLI:
 
-```bash
-gh gpg-key add gpg_github_key.txt
+```MacOS | WSL | Linux
+gh gpg-key add gpg_github_key.asc
 ```
+
 - Configure Git to use your GPG key:
-```bash
+
+```MacOS | WSL | Linux
 git config --global user.signingkey YOUR_KEY_ID
 git config --global commit.gpgsign true
 ```
+
 - Add GPG to your ~/.bash_profile or ~/.zshrc by pasting export GPG_TTY=$(tty) to your shell config:
-```bash
-vim ~/.zshrc
+```MacOS | WSL | Linux
 # Paste the line exactly as it is below into your shell config
 export GPG_TTY=$(tty)
 ```
+
 - source the shell to have it take effects
-```bash
+
+```MacOS | WSL | Linux
 source ~/.zshrc
 ```
+
+```WSL | Linux
+source ~/.bashrc
 - Verify GPG key is added to Github
-```bash
+
+```MacOS | WSL | Linux
 gh gpg-key list
 ```
+
 ## Show your new security skills on Github
-- Create a new repository with AGPL 3.0 license using GitHub CLI:
-```bash
+
+- Create a new repository with AGPL 3.0 license using GitHub CLI.
+
+```MacOS | WSL2 | Linux
 gh repo create "cool project name" --public --license agpl-3.0 --clone
 ```
+
 **Please come up with a project name unique to you**
+
 - Change into the new directory
-```bash
+- **if you have zoxide installed use z instead of cd**
+
+```MacOS | WSL2 | Linux
 cd my-secure-project
 ```
-- Create a README.md file and add the text below
-```bash
-vim README.md
+
+- Create a README.md file with neovim
+
+```MacOS | WSL2 | Linux
+nvim README.md
+```
+
+- Add the below into the README.md
+
+```MacOS | WSL | Linux
 # My Secure Project
 
 This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
@@ -147,43 +210,74 @@ This project utilizes GPG (GNU Privacy Guard) keys for authentication with GitHu
 2. **Automated Signing**: Once set up, all your commits and tags can be automatically signed.
 3. **Simplified Key Management**: GitHub CLI simplifies the process of adding and managing GPG keys on your GitHub account.
 ```
+
 - add changes push the commit
+
 ```bash
 git add .
 git commit -S -m "Updated README.md"
 git push -u origin main
 ```
-**The -S flag in the git commit command is used for signing commits with your GPG key, adding a cryptographic signature to the commit that can be later verified to ensure authenticity.
-To verify the GPG signing is working, you can run:
+
+- **The -S flag in the git commit command is used for signing commits with your GPG key**
+- This authenticates your commit to you in a publicly verifiable way.
+- Verify the GPG signing is working, you can run:
+
 ```bash
 git log --show-signature -1
 ```
+
 ** This should display a "Good signature" message for the latest commit.
 
 **Set the git configs below to manager dealing with larger Repositories**
+
 - Increase buffer size
-```bash
+
+```MacOS | WSL2 | Linux
 git config --global http.postBuffer 524288000
 ```
+
 **This increases the buffer to 500MB, which can help with large repositories.**
 - Disable compression
-```bash
+
+```MacOS | WSL | Linux
 git config --global core.compression 0
 ```
+
 - Increase timeout
-```bash
+
+```MacOS | WSL | Linux
 git config --global http.lowSpeedLimit 1000
 git config --global http.lowSpeedTime 300
 ```
 
 **In the event you still can't download a large repo, try using shallow cloning**
-```bash
+
+```MacOS | WSL | Linux
 git clone --depth 1 <repository-url>
 cd repo
 git fetch --unshallow
 ```
+
 - Using the Git Large File Storage (LFS) can also help
-```bash
+
+```MacOS
+brew install git-lfs
+```
+
+```Arch | WSL2 Arch
+sudo pacman -S git-lfs
+```
+
+```Ubuntu/Debian | WSL 2 Ubuntu/Debian
+sudo apt install git-lfs
+```
+
+```MacOS | WSL2 | WSL |
 git lfs install
 git lfs pull
 ```
+
+## Level 2 Finish Line
+
+- And you're done with level 2! Keep it up!
