@@ -2,11 +2,15 @@
 
 - Confirm your installation of github cli
 
-```MacOS | WSL | Linux
+- Linux | MacOS | Microsoft WSL
+
+```
 gh auth login
 ```
 
 - Test the key  
+
+MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
 ssh -T git@github.com
@@ -14,6 +18,7 @@ ssh -T git@github.com
 
 - Remember to ensure your SSH agent is running and the key is loaded. If its's not in your shell config run these commands one line at a time.
 
+MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
 eval "$(ssh-agent -s)"
@@ -26,23 +31,30 @@ ssh-add ~/.ssh/id_ed25519
 
 1A. Install GPG (MacOS)
 
+MacOS
+
 ```MacOS
 brew install gnupg
 ```
 
 1B. Install GPG (Linux/Microsoft WSL)
 
+- Arch/ WSL Arch
+
 ```Arch | WSL 2 Arch
 sudo pacman -Syyu
 sudo pacman -S gnupg
 ```
+- Debian/Ubuntu | WSL2 Debian/Ubuntu
 
-```Debian/Ubuntu | WSL2 Debian/Ubuntu
+```bash
 sudo apt update && sudo apt upgrade
 sudo apt install gnupg
 ```
 
 2. Generate a new GPG key
+
+MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
 gpg --expert --full-generate-key
@@ -50,7 +62,9 @@ gpg --expert --full-generate-key
 
 - You'll see an output like the one below
 
-```MacOS | WSL | Linux
+MacOS | WSL | Linux
+
+```
 gpg --expert --full-generate-key
 Please select what kind of key you want:
    (1) RSA and RSA
@@ -71,6 +85,8 @@ Your selection?
 
 - Then press 1 to select Curve 25519 *default*, based on the output below
 
+MacOS | WSL | Linux
+
 ```MacOS | WSL | Linux
 Please select which elliptic curve you want:
    (1) Curve 25519 *default*
@@ -86,6 +102,8 @@ Please select which elliptic curve you want:
 
 - Type 1y for one year expiration
 
+MacOS | WSL | Linux
+
 ```MacOS | WSL2 | Linux
 Key is valid for? (0) 1y
 Key expires at Mon 25 Aug 2025 06:28:38 PM PDT
@@ -95,6 +113,8 @@ Is this correct? (y/N)
 - Then type in your name, email address, and a comment to identify the key.
 - It is common practice to leave the comment blank.
 - Because you're a qompass pathfinder, put qompass as the comment, example below.
+
+- MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
 GnuPG needs to construct a user ID to identify your key.
@@ -107,6 +127,8 @@ Comment: qompass
 - Type o and then enter a passphrase for the new keypair.
 - The final output will looke like the below.
 
+- MacOS | WSL | Linux
+
 ```MacOS | WSL | Linux
 Real name: Matt A. Porter
 Email address: map@qompass.ai
@@ -117,12 +139,16 @@ You selected this USER-ID:
 
 - Check if you made the key correctly by listing your secret key's
 
-```MacOS | WSL | Linux
+- MacOS | WSL | Linux
+
+```
 gpg --list-keys --keyid-format LONG
 ```
 
 **Your key ID is on the line starting with "sec" after the "/"**
 - Export your GPG public key from your secret key id.
+
+- MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
 gpg --armor --export YOUR_KEY_ID > gpg_github_key.asc
@@ -131,11 +157,15 @@ gpg --armor --export YOUR_KEY_ID > gpg_github_key.asc
 **You can name the public key anything.txt, just make sure it is unique to you**
 - Add the GPG key to your GitHub account using the GitHub CLI:
 
+- MacOS | WSL | WSL | Linux
+
 ```MacOS | WSL | Linux
 gh gpg-key add gpg_github_key.asc
 ```
 
 - Configure Git to use your GPG key:
+
+- MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
 git config --global user.signingkey YOUR_KEY_ID
@@ -143,20 +173,29 @@ git config --global commit.gpgsign true
 ```
 
 - Add GPG to your ~/.bash_profile or ~/.zshrc by pasting export GPG_TTY=$(tty) to your shell config:
-```MacOS | WSL | Linux
-# Paste the line exactly as it is below into your shell config
+
+- MacOS | WSL | Linux
+
+- **Paste the line exactly as it is below into your shell config (~/.bashrc for linux/wsl and ~/.zshrc for Mac)
+```
 export GPG_TTY=$(tty)
 ```
 
 - source the shell to have it take effects
 
+- MacOS
+
 ```MacOS | WSL | Linux
-source ~/.zshrc
+. ~/.zshrc
 ```
 
+- MacOS | WSL | Linux
+
 ```WSL | Linux
-source ~/.bashrc
+. ~/.bashrc
 - Verify GPG key is added to Github
+
+- MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
 gh gpg-key list
@@ -166,7 +205,9 @@ gh gpg-key list
 
 - Create a new repository with AGPL 3.0 license using GitHub CLI.
 
-```MacOS | WSL2 | Linux
+- MacOS | WSL | Linux
+
+```bash
 gh repo create "cool project name" --public --license agpl-3.0 --clone
 ```
 
@@ -175,19 +216,25 @@ gh repo create "cool project name" --public --license agpl-3.0 --clone
 - Change into the new directory
 - **if you have zoxide installed use z instead of cd**
 
-```MacOS | WSL2 | Linux
+- MacOS | WSL | Linux
+
+```bash
 cd my-secure-project
 ```
 
 - Create a README.md file with neovim
 
+- MacOS | WSL | Linux
 ```MacOS | WSL2 | Linux
 nvim README.md
 ```
 
 - Add the below into the README.md
 
-```MacOS | WSL | Linux
+- MacOS | WSL | Linux
+
+- MacOS | WSL | Linux
+```[bash](2024-10-01_bash.md)
 # My Secure Project
 
 This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
@@ -213,6 +260,8 @@ This project utilizes GPG (GNU Privacy Guard) keys for authentication with GitHu
 
 - add changes push the commit
 
+- MacOS | WSL | Linux
+
 ```bash
 git add .
 git commit -S -m "Updated README.md"
@@ -222,6 +271,8 @@ git push -u origin main
 - **The -S flag in the git commit command is used for signing commits with your GPG key**
 - This authenticates your commit to you in a publicly verifiable way.
 - Verify the GPG signing is working, you can run:
+
+- MacOS | WSL | Linux
 
 ```bash
 git log --show-signature -1
@@ -233,12 +284,16 @@ git log --show-signature -1
 
 - Increase buffer size
 
-```MacOS | WSL2 | Linux
+- MacOS | WSL | Linux
+
+```bash
 git config --global http.postBuffer 524288000
 ```
 
-**This increases the buffer to 500MB, which can help with large repositories.**
+**This increases the buffer to 500MB, which can help with downloading large repositories.**
 - Disable compression
+
+- MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
 git config --global core.compression 0
@@ -246,14 +301,18 @@ git config --global core.compression 0
 
 - Increase timeout
 
-```MacOS | WSL | Linux
+- MacOS | WSL | Linux
+
+```bash
 git config --global http.lowSpeedLimit 1000
 git config --global http.lowSpeedTime 300
 ```
 
 **In the event you still can't download a large repo, try using shallow cloning**
 
-```MacOS | WSL | Linux
+MacOS | WSL | Linux
+
+```bash
 git clone --depth 1 <repository-url>
 cd repo
 git fetch --unshallow
@@ -261,19 +320,24 @@ git fetch --unshallow
 
 - Using the Git Large File Storage (LFS) can also help
 
+- MacOS
+
 ```MacOS
 brew install git-lfs
 ```
 
+- Arch |WSL Arch
+
 ```Arch | WSL2 Arch
 sudo pacman -S git-lfs
 ```
+- Debian/Ubuntu | WSL2 Debian/Ubuntu
 
-```Ubuntu/Debian | WSL 2 Ubuntu/Debian
+```bash
 sudo apt install git-lfs
 ```
-
-```MacOS | WSL2 | WSL |
+MacOS | WSL | Linux
+```bash
 git lfs install
 git lfs pull
 ```
