@@ -27,11 +27,13 @@ which python
 pip3 install numpy scipy pandas matplotlib
 pip3 install pynvim
 
--MacOS
-
 ```
+
 ## MacOS
 - Install Homebrew if not already installed
+
+- MacOS
+
 ```MacOS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install python neovim node git git-lfs
@@ -132,6 +134,7 @@ huggingface-cli whoami
 - Install homebrew if it isn't already installed (IGNORE for Microsoft WSL/Linux)
 
 - MacOS
+
 ```MacOS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install gh
