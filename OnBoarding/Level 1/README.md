@@ -15,7 +15,7 @@
 **Anytime "Terminal" is referenced from this point on, that either means the terminal app or iterm in mac, or WSL2 in windows. If you're running Linux natively, your default terminal will usually be a bash based terminal.**
 - How to set up software on your system for Qompass work (can be typed or copy/paste) all of the code block into your system.
 
-- Arch/ WSL2 Arch
+## Arch/ WSL2 Arch
 
 ```Arch/WSL2 Arch
 sudo pacman -Syyu
@@ -40,7 +40,7 @@ brew install python neovim node git git-lfs
 pip3 install transformers torch torchvision torchaudio
 ```
 
--Debian/Ubuntu | WSL2 Debian/Ubuntu
+## Debian/Ubuntu | WSL2 Debian/Ubuntu
 
 ```bash
 sudo apt update && upgrade
