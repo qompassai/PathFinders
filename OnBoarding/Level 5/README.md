@@ -9,7 +9,7 @@ brew update && brew upgrade && brew cleanup && brew doctor
 brew install ufw pinentry-mac gnupg
 ```
 
-- Arch/WSL2 Arch
+- Arch Linux | WSL2 Arch
 
 ```Arch/WSL2 Arch
 sudo pacman -Syyu && sudo pacman -Scc && sudo pacman -S ufw pinentry-ncurses gnupg
@@ -45,8 +45,10 @@ sudo nvim /etc/ssh/sshd_config
 - MacOS | Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
 
 ```MacOS | Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
+
 PubkeyAuthentication yes
 PasswordAuthentication no
+    
 ```
 
 - Restart the ssh daemon
@@ -57,6 +59,7 @@ sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
 ```
 
 ```Arch/WSL2 Arch | Ubuntu/Debian | WSL2 Ubuntu/Debian
+
 systemctl enable ssh
 systemctl daemon-reload
 systemctl restart sshd
@@ -109,15 +112,18 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 ```
 
-### Arch/Ubuntu/WSL2 Copy the below then press esc, :wq and source .bashrc
+### Arch/Ubuntu/WSL2 Copy the below then press esc, :wq and source .bashrc (. .bashrc), MacOs source zshrc (. .zshrc)
 
 ```Arch/WSL2 Arch | WSL2 | Linux
+
 #QPG
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
-```
 
+
+```
+- **MacOS | Arch/WSL2 Arch | Ubuntu/Debian
 - Reload the gpg-agent
 
 ```Arch/WSL2 Arch | WSL2 | Linux
@@ -130,7 +136,7 @@ gpg-connect-agent reloadagent /bye
 gpg --list-keys --with-subkey-fingerprints "email for your keys"
 ```
 
-- export your gpg key
+- export your gpg key subkeys
 
 ```Arch/WSL2 Arch | WSL2 | Linux
 gpg --armor --export --export-options export-minimal --export-ssh-key <KEY_ID> > my_public_key.asc

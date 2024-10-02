@@ -15,6 +15,8 @@
 **Anytime "Terminal" is referenced from this point on, that either means the terminal app or iterm in mac, or WSL2 in windows. If you're running Linux natively, your default terminal will usually be a bash based terminal.**
 - How to set up software on your system for Qompass work (can be typed or copy/paste) all of the code block into your system.
 
+- Arch/ WSL2 Arch
+
 ```Arch/WSL2 Arch
 sudo pacman -Syyu
 sudo pacman -S base base-devel python python-pip git git-lfs neovim
@@ -24,6 +26,9 @@ pip --version
 which python
 pip3 install numpy scipy pandas matplotlib
 pip3 install pynvim
+
+-MacOS
+
 ```
 ## MacOS
 - Install Homebrew if not already installed
@@ -33,7 +38,7 @@ brew install python neovim node git git-lfs
 pip3 install transformers torch torchvision torchaudio
 ```
 
-## Debian/Ubuntu | WSL2 Debian/Ubuntu
+-Debian/Ubuntu | WSL2 Debian/Ubuntu
 
 ```bash
 sudo apt update && upgrade
@@ -60,6 +65,8 @@ pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai] transforme
 
 **if you get an error when installing pip add --break-system-packages after the -U**
 
+- Linux | MacOS | Microsoft WSL2
+
 ```bash
 pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U --break-system-packages
 ```
@@ -70,6 +77,8 @@ pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U --brea
 **For zsh (macos) type vim ~/.zshrc, then copy and paste the below, then type :wq to write the config and quit out of the terminal config file** 
 **for WSL2, type vim ~/.bashrc, then copy and paste the below, then type :wq to write the config and quit out of the terminal config file**  
 
+- Linux | MacOS | Microsoft WSL2
+
 ```bash
 export HF_HUB_ENABLE_HF_TRANSFER=1
 ```
@@ -77,6 +86,8 @@ export HF_HUB_ENABLE_HF_TRANSFER=1
 ## Step 4: Link Your Account to Hugging Face Hub
 
 - In the Terminal, type the following command and press Enter:
+
+- Linux | MacOS | Microsoft WSL2
 
 ```bash
 huggingface-cli login
@@ -102,6 +113,8 @@ huggingface-cli login
 
 - In the Terminal, type the following command and press Enter:
 
+ - Linux | MacOS | Microsoft WSL2
+
 ```bash
 huggingface-cli whoami
 ```
@@ -118,6 +131,7 @@ huggingface-cli whoami
 
 - Install homebrew if it isn't already installed (IGNORE for Microsoft WSL/Linux)
 
+- MacOS
 ```MacOS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install gh
@@ -127,9 +141,12 @@ brew install gh
 
 - Follow instructions on here based on your version of WSL2/Linux["https://github.com/cli/cli/blob/trunk/docs/install_linux.md"]
 
+- Arch | WSL2 Arch
+
 ```Arch | WSL2 Arch
 sudo pacman -S github-cli
 ```
+-Debian/Ubuntu | WSL2 Debian/Ubuntu
 
 ```Debian/Ubuntu \WSL2 Ubuntu/Debian
 sudo apt install gh
@@ -141,9 +158,13 @@ sudo apt install gh
 
 - If you have WSL2 or Linux, ensure OpenSSH is installed is installed on your machine.
 
+- Arch \ WSL2 Arch
+
 ```Linux | WSL2 Arch |
 sudo pacman -S openssh gnupg
 ```
+
+- Ubuntu/Debian | WSL2 Ubuntu/Debian
 
 ```WSL2 Ubuntu/Debian
 sudo apt install openssh-server openssh-client gnupg
@@ -155,6 +176,8 @@ sudo apt install openssh-server openssh-client gnupg
 ```MacOS | Linux | WSL2 Arch/Debian/Ubuntu | WSL2
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
+
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
 
 ```SSH Keys Explained
 `ssh-keygen -t ed25519 -C "your_email@example.com"` generates a new SSH key pair.
@@ -183,11 +206,15 @@ This command creates a highly secure SSH key pair to remotely access servers
 **The private key should be kept SECRET and SECURE on your local machine**
 **The public key can be shared and added to services like GitHub for authentication.**
 
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
+
 ```bash
  ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 - You'll know it's right because it will look like this
+
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
 
 ```bash
 [OnBoarding]$ ssh-keygen -t ed25519 -C "map@qompass.ai"
@@ -197,20 +224,25 @@ Enter file in which to save the key (/home/phaedrus/.ssh/id_ed25519):
 
 - Start the SSH agent (what handles your keys):
 
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
+
 ```bash
 eval "$(ssh-agent -s)"
 ```
 
 - Add your SSH key to the agent
 
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
+
 ```bash
 ssh-add ~/.ssh/id_ed25519
 ```
 
-- Add ssh agent to your shell config (~/.zshrc for zshh or ~/.bashrc for bash). You can use nano, vim, or nvim to access. 
+- Add ssh agent to your shell config (~/.zshrc for zsh or ~/.bashrc for bash). You can use nano, vim, or nvim to access. 
 **Depending on your config, you may need to use sudo (super user do)to edit and save**
 - Access your shell config )~/.zshrc for mac, ~/.bashrc for windows)
 
+- MacOS | WSL2 Arch/Debian/Ubuntu
 ```bash
 vim ~/.zshrc
 ```
@@ -228,6 +260,8 @@ fi
 - **This above script checks if the SSH agent is already running.**
 - If they're not running, it starts the agent and adds your SSH keys.**
 - Save and source your shell config to activate the script.
+
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
 
 ```bash
 # For neovim/vim (in normal mode - ie press esc if in insert mode)
@@ -247,10 +281,15 @@ source ~/.bashrc
 - undo/redo until you're at the oldest change.
 - **Then** type :qa to quit.
 
+0 - MacOS 
+
+
 ```bash
 chmod u+w ~/.zshrc
 chmod 644 ~/.zshrc
 ```
+
+- Linux | WSL2 Arch/Debian/Ubuntu
 
 ```bash
 chmod u+w ~/.bashrc
@@ -259,12 +298,18 @@ chmod 644 ~/.bashrc
 
 - **add sudo before chmod to make changes to your shell config for permission errors)**
 
+- MacOS
+
 ```zsh (MacOS default)
 sudo chown $USER:$USER ~/.zshrc
 ```
 
+- Linux | WSL2 Arch/Debian/Ubuntu
+
 ```bash (Linux/WSL2 default)
 sudo chown $USER:$USER ~/.bashrc
+
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
 
 ```Explanation
 * chmod: The command to change file permissions
@@ -275,9 +320,9 @@ sudo chown $USER:$USER ~/.bashrc
 
 ## SSH Key Authentication via the GitHub CLI
 
-### For MacOS | Linux | WSL2 Arch/Debian/Ubuntu | WSL2
-
 - Copy the SSH key to your clipboard
+
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
 
 ```bash
 pbcopy < ~/.ssh/id_ed25519.pub
@@ -285,11 +330,15 @@ pbcopy < ~/.ssh/id_ed25519.pub
 
 - Authenticate with github cli (gh), following the prompts to select ssh as default
 
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
+
 ```bash
 gh auth login
 ```
 
 - Add keys to your github
+
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
 
 ```bash
 gh ssh-key add ~/.ssh/id_ed25519.pub -t "Something unique"
@@ -298,6 +347,8 @@ gh ssh-key add ~/.ssh/id_ed25519.pub -t "Something unique"
 **Replace "Something unique" with a descriptive title for your key.**
 
 - Check that your key has been added
+
+- Linux | MacOS | WSL2 Arch/Debian/Ubuntu
 
 ```bash
 gh ssh-key list
