@@ -35,3 +35,4 @@ Qompass Intern program: Destitutus ventis, remos adhibe
 - [ Change Healthcare Cyberattack: Described as "the most serious cyberattack in history on the health care system" by the American Hospital Association](https://www.hhs.gov/hipaa/for-professionals/special-topics/change-healthcare-cybersecurity-incident-frequently-asked-questions/index.html)
 
 - [Finance worker pays out $25 million after video call with deepfake ‘chief financial officer’ ](https://www.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk/index.html)
+[Video on the same](https://youtu.be/lH608DfrAxU?si=JVmFkPwPacm3HjQc)
