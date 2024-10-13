@@ -37,5 +37,6 @@ Qompass Intern program: Destitutus ventis, remos adhibe
 - [Finance worker pays out $25 million after video call with deepfake ‘chief financial officer’ ](https://www.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk/index.html)
 [Video on the same](https://youtu.be/lH608DfrAxU?si=JVmFkPwPacm3HjQc)
 
+
 ## Licensing
-This project is dual-licensed under the terms of the [LICENSE](LICENSE) and [AGPL-3.0](LICENSE-AGPL) licenses.
+This respitory and all applications within it are dual-licensed under the terms of the [LICENSE](LICENSE) and [AGPL-3.0](LICENSE-AGPL) licenses.
