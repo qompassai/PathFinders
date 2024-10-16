@@ -37,6 +37,7 @@ Alice wants to send the message "HELLO" to Bob. They share a secret `key` K = 3.
 
 1.1 A modulus is the remainder after division of one number by another. In mathematics, it's often written as:
 `a mod n = r`
+
 Where:
 'a' is the number being divided
 'n' is the number we're dividing by (called the modulus)
