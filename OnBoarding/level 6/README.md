@@ -1,4 +1,4 @@
-#Level 6 Authenticated Encryption from First Principles
+# Level 6 Authenticated Encryption from First Principles
 
 ## Objective: By the end of this lesson, you will understand the basics of authenticated encryption, solve a simple math problem illustrating the concept, as it relates to our hands-on experience with GPG and SSH. We end with a quick intro to SSL.
 
