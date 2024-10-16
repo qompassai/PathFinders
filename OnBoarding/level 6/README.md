@@ -72,6 +72,7 @@ Therefore, `15 mod 4 = 3`
 - Programming, mathematics and data science all interact with modular arithmetic in different ways, all valid.  We're often concerned with these integer results rather than the floating-point quotients because of the exacting nature inherent in integer arithmetic. In contrast, floating-point arithmetic can introduce small rounding errors that open opportunity which runs counter to the needs of the precise, predictable results necessary when sharing sensitive information. Enter cryptography.
 
 - This integer-based approach is fundamental to many algorithms, including those used in cryptography like the Caesar cipher.
+
 2. Compute the MAC by adding the numerical values of the plaintext letters and taking the modulus with 26.
 
 
@@ -140,13 +141,65 @@ Assign numerical values: A=0, B=1, ..., Z=25.
 
 Shift letters by adding the key and wrapping around at 25 (if necessary).
 
-2.4 Solution -No peeking!
+2.3A - What are we `Wrapping around?`
+
+ Imagine an old analog clock face with twelve hours and you have a spool of string. This is a perfect high level real-world example of modular arithmetic in action.
+
+In clock arithmetic, we're working in modulo 12. This means:
+
+Wrapping the string around the clock demonstrates how numbers "wrap around" after reaching 12. 
+
+We only care about the remainder when dividing by 12.
+
+Here's how it works:
+Basic Addition:
+If it's 10 o'clock and we add 3 hours:
+10 + 3 = 13, but on our clock, this becomes 1 o'clock.
+
+Mathematically:
+`(10 + 3) mod 12 = 13 mod 12 = 1`
+
+Handling Larger Numbers:
+
+If it's 9 o'clock and we add 27 hours:
+`9 + 27 = 36`, but on a clock, this becomes 12 o'clock.
+
+Mathematically: 
+``(9 + 27) mod 12 = 36 mod 12 = 0` **(where 0 represents 12 on a clock)**
+
+Subtraction:
+
+If it's 2 o'clock and we go back 4 hours:
+
+`2 - 4 = -2`, but on a clock, this becomes `10 o'clock`.
+
+Mathematically: 
+``(2 - 4) mod 12 = -2 mod 12 = 10`
+
+**(In modular arithmetic, negative numbers wrap around from the other side)**
+
+Multiplication:
+
+3 times 5 o'clock:
+
+`3 * 5 = 15`, but on a clock, this becomes 3 o'clock.
+Mathematically: 
+``(3 * 5) mod 12 = 15 mod 12 = 3`
+
+In each case, we're only concerned with the remainder when dividing by 12. This is why we end up with numbers between 0 and 11 (or 1 and 12 on a clock face).
+
+This same principle applies to larger moduli, like in cryptography where we might use modulo operations with very large prime numbers. The key idea remains the same: we're always working within a fixed set of numbers, **wrapping around** when we exceed the modulus.
+
+This property is particularly useful in computer science and cryptography because it    allows us to work with fixed-size integers, preventing overflow and it creates cyclic patterns that can be exploited for various algorithms.
+ This cyclic, deterministic nature forms the basis of many encryption techniques, where the difficulty of certain modular operations (like finding modular inverses of large numbers) provides security.
+
+2.4  Let's check our work!
 
 Encrypt the Message
 
 Assign numerical values:
 
-```
+```bash
 W → 22
 
 O → 14
@@ -159,7 +212,8 @@ D → 3
 ```
 
 Shift each letter by 5:
-```
+
+```bash
 W: (22 + 5) mod 26 = 1 → B
 
 O: (14 + 5) mod 26 = 19 → T
@@ -187,17 +241,19 @@ Compute the MAC:
 
 ## Part 3: Hands-On with Open-Source encryption 
 
-GPG (GNU Privacy Guard) allows you to encrypt and sign messages.
+GPG (GNU Privacy Guard) is a free and open-source tool that allows you to encrypt and sign messages. OpenPGP, SequoiaPGP and others use this same tool with modifications (like being written in Rust for OpenPGP) in the Enterprise.
 
 3.1 Install GPG
 
-** Linux/MacOS: GPG is usually pre-installed. If not, install via your package manager.
+** Linux/MacOS: GPG is usually pre-installed. If not, install via your package manager (brew for mac.
 
 Windows: Download from GPG4Win.
 
 3.2 Generate a Key Pair
 
+```bash
 gpg --full-generate-key
+```
 
 Select RSA and RSA.
 
@@ -213,18 +269,21 @@ Imagine you have a friend named Bob.
 
 Export your public key:
 
-```gpg --export --armor "Your Name" > your_public_key.asc
+```bash
+gpg --export --armor "Your Name" > your_public_key.asc
 ```
 Import Bob's public key:
 
-```
+```bash
 gpg --import bob_public_key.asc
 ```
 3.4 Encrypt and Sign a Message
 
 Create a file message.txt with the content "Hello, Bob!"
 
+```
 gpg --encrypt --sign --armor -r "Bob" message.txt
+```
 
 This creates message.txt.asc, an encrypted and signed message.
 
@@ -233,8 +292,9 @@ This creates message.txt.asc, an encrypted and signed message.
 
 If Bob sends you an encrypted message encrypted_message.asc, decrypt it:
 
+```
 gpg --decrypt encrypted_message.asc
-
+```
 
 ---
 
@@ -244,8 +304,9 @@ SSH allows secure remote login and command execution.
 
 4.1 Generate SSH Keys
 
+```bash
 ssh-keygen -t rsa -b 2048 -C "your_email@example.com"
-
+```
 Press Enter to accept the default file location.
 
 Set a passphrase (optional but recommended).
@@ -253,24 +314,24 @@ Set a passphrase (optional but recommended).
 
 4.2 Copy Public Key to Server
 
+```bash
 ssh-copy-id user@remote_server
+```
 
 This copies your public key to the ~/.ssh/authorized_keys file on the server.
 
-
 4.3 Connect to the Server
-
+    
+```bash
 ssh user@remote_server
-
+```
 You should now connect without a password (if you didn't set a passphrase) or by entering your key's passphrase.
-
-
 
 ---
 
-Part 5: Understanding SSL/TLS
+Part 5: Understanding encryption on the internet via the Secure Socket Layer (SSL)/ and Transport Layer Security (TLS)
 
-SSL/TLS protocols secure internet communication.
+SSL/TLS protocols secure internet communication - aka every time you access any modern website, you are using engaging in a secure three part "Handshake" between your computer (aka the "client") and the "Server" aka the website you are accessing.
 
 5.1 Exploring HTTPS
 
@@ -278,51 +339,47 @@ Use a web browser to visit a secure site like https://example.com.
 
 Click on the padlock icon to view the site's SSL certificate.
 
-Note the certificate issuer and validity period.
+Note the certificate issuer and validity period. Certificates are how a website proves it is authentic. Optimally you want to see that the certificate is issued by a Certificate authority like Cloudflare(free or commercial) or ACME (free). 
 
 5.2 Simple SSL Server with OpenSSL
 
-Let's create a self-signed certificate and run a simple SSL server.
-
-Step
+ To show why we value certificate authorities, let's create a self-signed certificate and run a simple SSL server locally.
 
 Step 1: Generate a Self-Signed Certificate
 
-```openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
+```bash
+openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
 ```
 
 Set a passphrase and provide certificate details.
 
-When prompted for "Common Name," enter "localhost".
-
-
+When prompted for "Common Name," enter "localhost". This stays with us.
 
 Step 2: Start a Simple SSL Server
-```
+
+```bash
 openssl s_server -accept 4433 -cert cert.pem -key key.pem
 ```
 
 Step 3: Connect to the Server
 
 Open another terminal and run:
-
+```
 openssl s_client -connect localhost:4433
+```
+You'll see the SSL handshake (shaking Your own hand in this case) and can type a message.
 
-You'll see the SSL handshake and can type messages.
-
-
+So you see, anyone can generate a certificate to offer as a "handshake" with your computer. We rely on certificate authorities to make sure we do so safely.
 
 ---
 
-Conclusion
+So what did we learn today?
 
-In this lesson, you've:
+High level basics of authenticated encryption.
 
-Learned the basics of authenticated encryption.
+The pen-and-paper math behind encryption and MAC computation.
 
-Solved a math problem illustrating encryption and MAC computation.
-
-Practiced encrypting and signing messages with GPG.
+The technical tools for encrypting and signing messages with GPG.
 
 Set up SSH keys for secure authentication.
 
