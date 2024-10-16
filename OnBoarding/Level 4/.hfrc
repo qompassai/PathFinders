@@ -1,0 +1,9 @@
+# Hugging Face Cache Directories
+#Pass for HF
+export HUGGING_FACE_HUB_TOKEN=$(pass show hf)
+# Where your models will download to 
+export TRANSFORMERS_CACHE="/HF/Models"
+
+# Where your datasets will download to 
+export HF_DATASETS_CACHE="${HOME}/HF/Datasets"
+
