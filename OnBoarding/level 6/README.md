@@ -271,19 +271,19 @@ Imagine you have a friend named Bob.
 Export your public key:
 
 ```bash
-gpg --export --armor "Your Name" > your_public_key.asc
+gpg --export --armor "Your Name" > my_public_key.asc
 ```
 Import Bob's public key:
 
 ```bash
-gpg --import bob_public_key.asc
+gpg --import my_public_key.asc
 ```
 3.4 Encrypt and Sign a Message
 
 Create a file message.txt with the content "Hello, Bob!"
 
 ```
-gpg --encrypt --sign --armor -r "Bob" message.txt
+gpg --encrypt --sign --armor message.txt
 ```
 
 This creates message.txt.asc, an encrypted and signed message.
@@ -291,10 +291,12 @@ This creates message.txt.asc, an encrypted and signed message.
 
 3.5 Decrypt a Message
 
-If Bob sends you an encrypted message encrypted_message.asc, decrypt it:
+To check on our tools, decrypt the encrypted message encrypted_message.asc, decrypt it:
 
 ```
-gpg --decrypt encrypted_message.asc
+gpg --decrypt message.txt
+gpg --decrypt message.txt.asc
+
 ```
 
 ---
