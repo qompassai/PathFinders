@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+# Global Debug Mode (set to true for detailed logging, false for quiet)
+DEBUG_MODE=false
+
+# Function to print debug messages
+print_debug() {
+    if [[ "${DEBUG_MODE}" == true ]]; then
+        printf "%s\n" "$1"
+    fi
+}
+
+# Set Go environment variables for pacman-installed Go
+export GOROOT="/usr/lib/go"
+export GOPATH="${HOME}/go"
+export GOBIN="${GOPATH}/bin"
+
+# Update PATH to include GOROOT and GOBIN
+if [[ ":${PATH}:" != *":${GOROOT}/bin:"* ]]; then
+    export PATH="${PATH}:${GOROOT}/bin"
+    print_debug "[DEBUG] Added GOROOT/bin to PATH: ${GOROOT}/bin"
+fi
+
+if [[ ":${PATH}:" != *":${GOBIN}:"* ]]; then
+    export PATH="${PATH}:${GOBIN}"
+    print_debug "[DEBUG] Added GOBIN to PATH: ${GOBIN}"
+fi
+
+# Other Go environment variables
+export GO111MODULE="on"
+export GOOS="linux"
+export GOARCH="amd64"
+export GOPROXY="https://proxy.golang.org,direct"
+export GOSUMDB="sum.golang.org"
+
+print_debug "[DEBUG] Set GO111MODULE=${GO111MODULE}"
+print_debug "[DEBUG] Set GOOS=${GOOS}"
+print_debug "[DEBUG] Set GOARCH=${GOARCH}"
+print_debug "[DEBUG] Set GOPROXY=${GOPROXY}"
+print_debug "[DEBUG] Set GOSUMDB=${GOSUMDB}"
+
+# Neovim integration setup for Go
+# Install necessary Go tools for Neovim LSP and other Go-related plugins
+install_go_tool() {
+    local tool_name="$1"
+    local tool_url="$2"
+
+    if ! command -v "${tool_name}" &> /dev/null; then
+        print_debug "[DEBUG] Attempting to install ${tool_name}..."
+        go install "${tool_url}" &> /dev/null
+        if command -v "${tool_name}" &> /dev/null; then
+            print_debug "[DEBUG] Successfully installed ${tool_name}"
+        else
+            print_debug "[DEBUG] Failed to install ${tool_name}" >&2
+        fi
+    else
+        print_debug "[DEBUG] ${tool_name} is already installed"
+    fi
+}
+
+# Install/Update Go tools required for Neovim and Go development
+go_tools=(
+    "golang.org/x/tools/gopls@latest"  # Go Language Server
+    "golang.org/x/tools/cmd/goimports@latest"  # For automatic import management
+    "github.com/go-delve/delve/cmd/dlv@latest"  # Delve debugger
+    "github.com/golangci/golangci-lint/cmd/golangci-lint@latest"  # Go linter
+)
+
+for tool in "${go_tools[@]}"; do
+    tool_name=$(basename "${tool%%@*}")
+    install_go_tool "${tool_name}" "${tool}"
+done
+
+# Final debug output if DEBUG_MODE is enabled
+if [[ "${DEBUG_MODE}" == true ]]; then
+    printf "[DEBUG] Final Go environment configuration:\n"
+    printf "[DEBUG] GOROOT: %s\n" "${GOROOT}"
+    printf "[DEBUG] GOPATH: %s\n" "${GOPATH}"
+    printf "[DEBUG] GOBIN: %s\n" "${GOBIN}"
+    printf "[DEBUG] PATH: %s\n" "${PATH}"
+fi
+

@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+export DEBUG_MODE=false  
+
+# Function to print debug messages
+print_debug() {
+    if [[ "${DEBUG_MODE}" == true ]]; then
+        printf "%s\n" "$1"
+    fi
+}
+
+# Node Version Manager (NVM) setup
+export NVM_DIR="${HOME}/.nvm"
+if [[ -s "${NVM_DIR}/nvm.sh" ]]; then
+    source "${NVM_DIR}/nvm.sh"
+    print_debug "[DEBUG] Sourced nvm.sh from ${NVM_DIR}"
+else
+    print_debug "\U1F44E Warning: nvm.sh not found"
+fi
+
+# Load NVM bash completion
+if [[ -s "${NVM_DIR}/bash_completion" ]]; then
+    source "${NVM_DIR}/bash_completion"
+    print_debug "[DEBUG] Sourced nvm bash_completion from ${NVM_DIR}"
+else
+    print_debug "\U1F44E Warning: nvm bash_completion not found"
+fi
+
+# Compiler (LLVM) setup for npm
+export npm_config_clang=1
+print_debug "[DEBUG] Set npm_config_clang to use clang as the default compiler"
+
+# Bun setup
+export BUN_INSTALL="${HOME}/.bun"
+if [[ -d "${BUN_INSTALL}/bin" ]]; then
+    export PATH="${BUN_INSTALL}/bin:${PATH}"
+    print_debug "[DEBUG] Added Bun to PATH"
+else
+    print_debug "\U1F44E Warning: Bun installation directory not found"
+fi
+
+# NPM setup
+if [[ -d "$HOME/.npm-global/bin" ]]; then
+    export PATH="$HOME/.npm-global/bin:$PATH"
+    print_debug "[DEBUG] Added npm-global to PATH"
+else
+    print_debug "\U1F44E Warning: npm-global directory not found"
+fi
+
+# Print final debug summary if DEBUG_MODE is enabled
+if [[ "${DEBUG_MODE}" == true ]]; then
+    printf "[DEBUG] Final PATH: %s\n" "${PATH}"
+fi
+
+export PATH
+

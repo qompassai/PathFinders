@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Java configuration
+export JAVA_HOME=/usr/lib/jvm/java-22-openjdk
+export PATH="${JAVA_HOME}/bin:${PATH}"
+
+# Maven configuration
+export M2_HOME="/opt/maven"
+export PATH="${M2_HOME}/bin:${PATH}"
+
+# JNI configuration
+export LD_LIBRARY_PATH="${JAVA_HOME}/lib:${JAVA_HOME}/lib/server:${LD_LIBRARY_PATH}"
+export JAVA_TOOL_OPTIONS="-Djava.library.path=${JAVA_HOME}/lib:${JAVA_HOME}/lib/server"
+
+# Print configuration summary
+if [[ "$DEBUG_MODE" == true ]]; then
+    echo "[DEBUG] JAVA_HOME: $JAVA_HOME"
+    echo "[DEBUG] M2_HOME: $M2_HOME"
+#    echo "[DEBUG] SCALA_HOME: $SCALA_HOME"
+#    echo "[DEBUG] AMMONITE_HOME: $AMMONITE_HOME"
+    echo "[DEBUG] PATH: $PATH"
+fi

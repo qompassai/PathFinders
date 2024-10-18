@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# Global Debug Mode (set to true for detailed logging, false for quiet)
+DEBUG_MODE=false
+
+# Function to print debug messages
+print_debug() {
+    if [[ "${DEBUG_MODE}" == true ]]; then
+        printf "%s\n" "$1"
+    fi
+}
+
+# Set Swift-specific environment variables
+export SWIFT_PATH="/home/phaedrus/.local/bin"
+
+# Update PATH to include Swift binaries
+if [[ ":${PATH}:" != *":${SWIFT_PATH}:"* ]]; then
+    export PATH="${PATH}:${SWIFT_PATH}"
+    print_debug "[DEBUG] Added SWIFT_PATH to PATH: ${SWIFT_PATH}"
+fi
+
+# Swift Package Manager Cache Directory
+export SWIFTPM_CACHE_DIR="$HOME/.swiftpm/cache"
+if [[ ! -d "${SWIFTPM_CACHE_DIR}" ]]; then
+    mkdir -p "${SWIFTPM_CACHE_DIR}"
+    print_debug "[DEBUG] Created SwiftPM cache directory: ${SWIFTPM_CACHE_DIR}"
+fi
+
+
+# Swift Build Options
+export SWIFT_BUILD_FLAGS="-Xswiftc -Owholemodule -Xswiftc -enable-testing"
+print_debug "[DEBUG] Set SWIFT_BUILD_FLAGS: ${SWIFT_BUILD_FLAGS}"
+
+
+# Swift Formatter
+SWIFT_FORMAT_PATH="/usr//bin/swiftformat"
+if [[ -x "${SWIFT_FORMAT_PATH}" ]]; then
+    alias swift-format="${SWIFT_FORMAT_PATH}"
+    print_debug "[DEBUG] Added alias for swift-format: ${SWIFT_FORMAT_PATH}"
+else
+    print_debug "[DEBUG] Swift format tool not found at ${SWIFT_FORMAT_PATH}, please install it."
+fi
+
+# Final debug output if DEBUG_MODE is enabled
+if [[ "${DEBUG_MODE}" == true ]]; then
+    printf "[DEBUG] Final Swift environment configuration:\n"
+    printf "[DEBUG] SWIFT_PATH: %s\n" "${SWIFT_PATH}"
+    printf "[DEBUG] SWIFTPM_CACHE_DIR: %s\n" "${SWIFTPM_CACHE_DIR}"
+    printf "[DEBUG] SWIFT_TOOLCHAIN_PATH: %s\n" "${SWIFT_TOOLCHAIN_PATH}"
+    printf "[DEBUG] SWIFT_BUILD_FLAGS: %s\n" "${SWIFT_BUILD_FLAGS}"
+    printf "[DEBUG] PATH: %s\n" "${PATH}"
+    printf "[DEBUG] LD_LIBRARY_PATH: %s\n" "${LD_LIBRARY_PATH}"
+fi
+

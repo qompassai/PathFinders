@@ -1,0 +1,16 @@
+#!/bin/bash
+# Liboqs
+export CPATH="/usr/local/include:$CPATH"
+export LIBOQS_INCLUDE_DIR=/usr/local/include
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$HOME/liboqs-go/.config"
+# Main SSL
+export LIBOQS_LIB_DIR=/usr/local/lib
+export SSL_CERT_DIR=/etc/ssl/certs
+export OPENSSL_CONF=/etc/ssl/openssl.cnf
+export OPENSSL_ENGINES="/usr/local/lib/engines-3:/usr/lib/engines-3"
+export OPENSSL_MODULES="/usr/local/lib/ossl-modules:/usr/lib64/ossl-modules:/usr/lib/ossl-modules"
+export OPENSSL_DEBUG=1
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64:/usr/lib:/usr/lib64:$LD_LIBRARY_PATH
+export PATH=/usr/local/bin:$PATH
+export LDFLAGS="-L/usr/local/lib"
+export OPENSSL_VERSION=3.3.2 
