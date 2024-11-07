@@ -294,7 +294,6 @@ This creates message.txt.asc, an encrypted and signed message.
 To check on our tools, decrypt the encrypted message encrypted_message.asc, decrypt it:
 
 ```
-gpg --decrypt message.txt
 gpg --decrypt message.txt.asc
 
 ```
