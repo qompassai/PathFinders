@@ -35,8 +35,6 @@ Now that you have the fonts, you need to install them in your WSL2 Arch Linux en
 
    ```bash
    fc-cache -fv
-#if that doesn't work use
-   sudo fc-cache -fv
    ```
 
 3. **Verify Installation**:
@@ -48,17 +46,15 @@ Now that you have the fonts, you need to install them in your WSL2 Arch Linux en
 
    This command should display the paths to the installed DaddyTimeMono Nerd Fonts.
 
-## Step 3: Configure Your Terminal to Use DaddyTimeMono Nerd Font
+## Step 3: Configure Windows Terminal to Use DaddyTimeMono Nerd Font
 
-Next, you need to configure your terminal to use the "DaddyTimeMono Nerd Font". Since you are using WSL2 on a Windows machine, it is likely that you are using **Windows Terminal**, **Alacritty**, **WezTerm**, or another Windows-based terminal emulator.
-
-### **Windows Terminal Configuration**:
+Since you are using WSL2 on a Windows machine, you need to configure **Windows Terminal** to use the "DaddyTimeMono Nerd Font":
 
 1. **Open Windows Terminal Settings**:
    - Click on the down arrow in the title bar and select "Settings".
 
 2. **Select the Profile for WSL**:
-   - Choose the profile that you are using for Arch Linux (likely named "Arch", "Ubuntu", etc.).
+   - Choose the profile that you are using for Arch Linux (likely named "Arch Linux").
 
 3. **Set the Font**:
    - Find the `"fontFace"` property and set it to `"DaddyTimeMono Nerd Font"`.
@@ -76,37 +72,11 @@ Next, you need to configure your terminal to use the "DaddyTimeMono Nerd Font". 
        ]
    }
    ```
+   
+   **Note**: To find the `guid`, simply go to the settings in Windows Terminal, find the profile you're using (like "Arch Linux"), and copy the `guid` value from there. It will look like a long string of letters and numbers inside curly braces.
 
 4. **Save and Restart**:
    - Save the settings and restart the Windows Terminal.
-
-### **Alacritty Configuration** (If Applicable):
-
-If you’re using Alacritty as your terminal, update the `alacritty.yml` file:
-
-```yaml
-font:
-  normal:
-    family: "DaddyTimeMono Nerd Font"
-    style: Regular
-  bold:
-    family: "DaddyTimeMono Nerd Font"
-    style: Bold
-  italic:
-    family: "DaddyTimeMono Nerd Font"
-    style: Italic
-```
-
-### **WezTerm Configuration** (If Applicable):
-
-For WezTerm, you need to modify `wezterm.lua`:
-
-```lua
-return {
-  font = wezterm.font("DaddyTimeMono Nerd Font"),
-  font_size = 11.0,
-}
-```
 
 ## Step 4: Verify Font Availability in Neovim
 
@@ -135,17 +105,14 @@ If the Nerd Font still doesn’t work, consider the following troubleshooting st
 1. **Check Terminal Font Configuration**:
    Make sure you have entered the correct font name exactly as listed by Windows. Sometimes the name might be slightly different, so verify it via the Windows Fonts settings (`Control Panel > Fonts`).
 
-2. **Use Nerd Font Patched Terminals**:
-   You can also try using a GUI-based terminal that has better support for Nerd Fonts, such as **Neovide** or **Goneovim**, which you can configure to run with WSL2.
-
-3. **Permissions Issue**:
+2. **Permissions Issue**:
    Ensure that your WSL2 user has the proper permissions to access the font files in `~/.local/share/fonts`.
 
 ## Summary
 
 1. **Clone the Nerd Fonts repository** and extract only the "DaddyTimeMono" folder.
 2. **Install the font** locally in `~/.local/share/fonts` and update the cache with `fc-cache -fv`.
-3. **Configure your terminal** (Windows Terminal, Alacritty, WezTerm) to use the "DaddyTimeMono Nerd Font".
+3. **Configure your terminal** (Windows Terminal) to use the "DaddyTimeMono Nerd Font".
 4. **Verify** the setup in Neovim and troubleshoot if necessary.
 
 After following these steps, Neovim should pick up the "Mono Daddy Time Nerd Font" in your WSL2 Arch Linux setup and properly render the glyphs and icons.
