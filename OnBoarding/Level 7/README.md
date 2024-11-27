@@ -146,7 +146,7 @@ transformers: Hugging Face's transformer models library
 
 ```python
 # Used Python 3.12.7 /usr/bin/python x86_64 linux-gnu, YMMV
-pip3 install \
+pip install \
     'accelerate[testing,dev]' \
     'aiohttp' \
     beautifulsoup4 \
@@ -159,7 +159,7 @@ pip3 install \
     'fsspec[http,s3,gcs]' \
     functime \
     gensim \
-    'huggingface-hub[cli,torch,tensorflow,dev,testing,quality,hf_transfer]' \
+    'huggingface-hub[hf_transfer]' \
     httpfs \
     ibis-framework \
     ibm-platform-services \
@@ -197,16 +197,12 @@ pip3 install \
     pyarrow \
     pydantic \
     pynvim \
-    pyo3-pack \
-    pyside2 \
     qiskit \
-    qiskit-aer-gpu \
     qiskit-ignis \
     requests \
     rustimport \
     sacremoses \
     safetensors \
-    'scikit-learn-intelex' \
     scipy \
     seaborn \
     seaborn-polars \
@@ -218,8 +214,8 @@ pip3 install \
     torch torchvision torchaudio \
     transformers \
     zebras \
-    'jax[cuda]' \
-    tensorflow 
+    'jax[cuda12]' \
+    tensorflow[and-cuda] --break-system-packages
 
 # Additional NVIDIA packages
 pip3 install \
