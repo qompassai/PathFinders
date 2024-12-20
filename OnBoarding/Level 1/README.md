@@ -62,7 +62,7 @@ pip --version
 - In the Terminal, type the following command and press Enter:
 
 ```bash
-pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai] transformers' -U
+pip install 'huggingface_hub[hf_transfer] xformers transformers' -U
 ```
 
 **if you get an error when installing pip add --break-system-packages after the -U**
@@ -70,7 +70,7 @@ pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai] transforme
 - Linux | MacOS | Microsoft WSL2
 
 ```bash
-pip install 'huggingface_hub[hf_transfer,cli,tensorflow,torch,fastai]' -U --break-system-packages
+pip install 'huggingface_hub[hf_transfer]' xformers transformers -U --break-system-packages
 ```
 
 - Wait for the installation to complete.
