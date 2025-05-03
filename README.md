@@ -1,3 +1,6 @@
+
+![Repository Views](https://komarev.com/ghpvc/?username=qompassai-Pathfinders)
+
 # Pathfinders
 Qompass Intern program: Destitutus ventis, remos adhibe
 
