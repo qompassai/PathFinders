@@ -1,14 +1,22 @@
+<!-- /qompassai/PathFinders/README.md -->
+<!-- --------------------------------- -->
+<!-- Copyright (C) 2025 Qompass AI, All rights reserved -->
 
 ![Repository Views](https://komarev.com/ghpvc/?username=qompassai-Pathfinders)
+<h2> Qompass AI Pathfinders </h2>
 
-# Pathfinders
-Qompass Intern program: Destitutus ventis, remos adhibe
+<h3> Deep Tech Intern Program </h3>
+
+<br>
+  <a href="https://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License: AGPL v3"></a>
+  <a href="./LICENSE-QCDA"><img src="https://img.shields.io/badge/license-Q--CDA-lightgrey.svg" alt="License: Q-CDA"></a>
+</p>
 
 ## What does a Qompass PathFinder do?
 
 - Qompass Pathfinders build cloud-native generative AI services for hybrid deployment in the cloud and on device in alignment with regulatory guidelines from the White House community. 
 
-- Through our program, Pathfinders not only develop the skills for implementing State-of-the-Art (SOTA) AI uses outside of ChatGPT, but also prepare themselves as the future strategic leaders increasingly called for by the international community at large. Pathfinders build all software using our on-device implementation of post-quantum encryption protocols endorsed by the National Institute of Standards & Technology (NIST) as well as SOTA open-source AI models from industry leaders (Google/Meta/Microsoft) and Huggingface.
+- Through our program, Pathfinders not only develop the skills for implementing State-of-the-Art (SOTA) AI uses outside of ChatGPT, but also prepare themselves as the future strategic leaders increasingly called for by the international community at large. Pathfinders build all software using our on-device implementation of post-quantum encryption protocols endorsed by the National Institute of Standards & Technology (NIST) as well as SOTA open-source AI models from industry leaders (Google/Meta/Microsoft) and HuggingFace.
 
 ## Do I need to know how to code to be a PathFinder?
 
