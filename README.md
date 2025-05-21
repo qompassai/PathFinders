@@ -3,6 +3,7 @@
 <!-- Copyright (C) 2025 Qompass AI, All rights reserved -->
 
 ![Repository Views](https://komarev.com/ghpvc/?username=qompassai-Pathfinders)
+![GitHub all releases](https://img.shields.io/github/downloads/qompassai/PathFinders/total?style=flat-square)
 <h2> Qompass AI Pathfinders </h2>
 
 <h3> Deep Tech Intern Program </h3>
