@@ -1,8 +1,0 @@
-# Hugging Face Cache Directories
-
-# Set cache directory for Hugging Face models
-export TRANSFORMERS_CACHE="${HOME}/HF/Models"
-
-# Set cache directory for Hugging Face datasets
-export HF_DATASETS_CACHE="${HOME}/HF/Datasets"
-
