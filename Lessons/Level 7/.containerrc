@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+# Set debug mode (false by default; use "true" to enable detailed output)
+DEBUG_MODE=${DEBUG_MODE:-false}
+
+# Function to print debug messages if debug mode is enabled
+debug_print() {
+    if [ "$DEBUG_MODE" = "true" ]; then
+        printf "%s\n" "$1"
+    fi
+}
+
+# Set Docker socket for rootless mode
+export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
+debug_print "Set DOCKER_HOST to ${DOCKER_HOST}"
+
+# Enable experimental Docker features
+export DOCKER_BUILDKIT=1
+debug_print "Enabled Docker BuildKit (DOCKER_BUILDKIT=${DOCKER_BUILDKIT})"
+
+# Set Docker config directory
+export DOCKER_CONFIG="${HOME}/.docker"
+debug_print "Set Docker config directory to ${DOCKER_CONFIG}"
+
+# Enable experimental CLI features
+export DOCKER_CLI_EXPERIMENTAL="enabled"
+debug_print "Enabled Docker CLI experimental features"
+

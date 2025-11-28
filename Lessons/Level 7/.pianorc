@@ -1,0 +1,35 @@
+#!/bin/bash
+#Piano
+piano=""
+piano=$(pass pianodb)
+export piano
+
+# HF
+HUGGINGFACE_TOKEN=""
+HF_HOME=""
+HF_USERNAME=""
+HF_HUB_ENABLE_HF_TRANSFER=""
+HF_TOKEN=""
+HF_HUB_ENABLE_HF_TRANSFER=1
+HUGGINGFACE_TOKEN=$(pass hf)
+HF_HOME="${HOME}/Forge/HF/Models/"
+HF_USERNAME=$(pass show hf)
+HF_TOKEN=$(pass show hf)
+export HF_HUB_ENABLE_HF_TRANSFER=1
+export HUGGINGFACE_TOKEN
+export HF_HOME
+export HF_USERNAME
+export HF_TOKEN
+
+# Mox
+MOX_WSU=$(pass mox/owsu)
+export MOX_WSU
+
+#OpenSSL
+# OpenSSL Environment Variables for User
+export OPENSSL_MODULES="/usr/lib/ossl-modules:/usr/local/lib/ossl-modules"
+#OPENSSL_CONF="${HOME}/.config/openssl/openssl.cnf"
+OPENSSL_ALLOW_PROXY_CERTS="1"
+export OPENSSL_MODULES
+# export OPENSSL_CONF
+export OPENSSL_ALLOW_PROXY_CERTS

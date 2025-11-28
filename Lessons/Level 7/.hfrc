@@ -1,0 +1,11 @@
+# Hugging Face Cache Directories
+
+# Set cache directory for Hugging Face models
+export TRANSFORMERS_CACHE="/home/phaedrus/Forge/HF/Models"
+
+# Set cache directory for Hugging Face datasets
+export HF_DATASETS_CACHE="/home/phaedrus/Forge/HF/Datasets"
+
+# Set general Hugging Face home cache to the current working directory
+export HF_HOME=$(pwd)
+
