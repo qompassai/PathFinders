@@ -119,7 +119,7 @@ Is this correct? (y/N)
 ```MacOS | WSL | Linux
 GnuPG needs to construct a user ID to identify your key.
 
-Real name: Matt A. Porter
+Real name: Owner
 Email address: map@qompass.ai
 Comment: qompass
 ```
@@ -130,11 +130,11 @@ Comment: qompass
 - MacOS | WSL | Linux
 
 ```MacOS | WSL | Linux
-Real name: Matt A. Porter
+Real name: Owner
 Email address: map@qompass.ai
 Comment: qompass 
 You selected this USER-ID:
-    "Matt A. Porter (qompass) <map@qompass.ai>"
+    "Owner (qompass) <map@qompass.ai>"
 ```
 
 - Check if you made the key correctly by listing your secret key's

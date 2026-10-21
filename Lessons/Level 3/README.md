@@ -116,7 +116,7 @@ gpg --list-keys map@qompass.ai
 pub   ed25519/0x4F8B914D6026570F 2024-08-23 [SC]
       Key fingerprint = 0BFC 1A9D 6DB0 0C36 7679  BB22 4F8B 914D 6026 570F
       Keygrip = 4543C960454617019853D6EB182EBFE0431CEAF5
-uid                   [ultimate] Matt Porter <map@qompass.ai>
+uid                   [ultimate] Owner <map@qompass.ai>
 sub   cv25519/0xDB8EDF1FEE97666C 2024-08-23 [E]
       Keygrip = C0988B3D68BCB3EBEB153B32B9C267F2B06D45B1
 sub   ed25519/0x3F5972D11713FFB3 2024-08-23 [S]
